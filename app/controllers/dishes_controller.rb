@@ -1,4 +1,5 @@
 class DishesController < ApplicationController
+    before_action :authenticate_user!
     def custom
         @menu = Menu.find(params[:id])
     end
@@ -8,7 +9,7 @@ class DishesController < ApplicationController
         
     end
     def show
-        render plain: "show"
+        
     end
 
     def create

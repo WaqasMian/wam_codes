@@ -4,23 +4,37 @@
 <br/><br/>
 <table border="1">
  <tr>
+  <% if current_user && current_user.admin%>
   <th> Dish Id</th>
   <th> Dish Name</th>
   <th> Price</th>
   <th> EDIT</th>
   <th> Destroy</th>
+  <%else %>
+   <th> Dish Id</th>
+   <th> Dish Name</th>
+   <th> Price </th>
+  <%end%>
+
  </tr>
  <% @menu.dish.each do |dish|%>
   <tr>
+  <% if current_user && current_user.admin%>
    <td> <%= dish.id %> </td>
    <td> <%= dish.name %> </td>
    <td> 1000 </td>
    <td> <%= link_to "Update", [:edit, dish.menu, dish] %> </td>
    <td> <%= link_to "Delete", [dish.menu, dish], method: :delete, data: {confirm: "Are you sure?"} %> </td>
+   <%else%>
+      <td> <%= dish.id %> </td>
+      <td> <%= dish.name %> </td>
+      <td> 1000 </td>
+    <%end%>
   </tr>
  <%end%>
 </table>
 
 <%= link_to "Create A New Dish", my_custom_path(id: @menu)%>
+<%= link_to "Back ", root_path%>
 
 

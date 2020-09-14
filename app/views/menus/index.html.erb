@@ -11,24 +11,37 @@
  
 <table border="1">
   <tr>
+    <%if current_user && current_user.admin%>
     <th>MENU ID</th>
     <th>MENU NAME</th>
+
     <th> SHOW </th>
     <th> EDIT </th>
     <th> DESTROY </th>
+    <%else%>
+    <th>MENU ID</th>
+    <th> MENU NAME </th>
+     <th> SHOW </th>
+    <%end%>
   </tr>
  
   <% @menus.each do |menu| %>
     <tr>
-      <td><%= menu.id %></td>
-      <td><%= menu.name %></td>
-      <td><%= link_to 'Show', menu_path(menu) %></td>
-      <td><%= link_to 'Update', edit_menu_path(menu) %></td>
-      <td><%= link_to 'Destroy', menu_path(menu), method: :delete, data: {confirm: "Are you sure?"} %></td>
-      
+      <% if current_user && current_user.admin %>
+        <td><%= menu.id %></td>
+        <td><%= menu.name %></td> 
+        <td><%= link_to 'Show', menu_path(menu) %></td>
+        <td><%= link_to 'Update', edit_menu_path(menu) %></td>
+        <td><%= link_to 'Destroy', menu_path(menu), method: :delete, data: {confirm: "Are you sure?"} %></td>
+      <% else %>
+        <td><%= menu.id %></td>
+        <td><%= menu.name %></td>
+        <td><%= link_to 'Show', menu_path(menu) %></td>         
+      <%end%>
     </tr>
   <% end %>
 </table>
-
-<h4> Create a New Menu &nbsp &nbsp &nbsp &nbsp &nbsp Create a New Dish</h4> 
-<p> <%= link_to "Create", new_menu_path%> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= link_to "Create", new_menu_path%> </p>
+<%if current_user && current_user.admin %>
+  <h4> Create a New Menu &nbsp &nbsp &nbsp &nbsp &nbsp Create a New Dish</h4> 
+ <p> <%= link_to "Create", new_menu_path%> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= link_to "Create", new_menu_path%> </p>
+<%end%>
