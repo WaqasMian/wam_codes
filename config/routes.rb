@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :menus do
     resources :dishes
   end
+
+  get 'my_custom', to: "dishes#custom"
   
   root "menus#index"
 end

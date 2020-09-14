@@ -1,0 +1,15 @@
+<h2>CREATING A NEW DISH</h2>
+<%= form_with(model: [ @menu, @menu.dish.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :Name %><br>
+    <%= form.text_field :name %>
+  </p>
+  <p>
+    <%= form.label :Cateogry %><br>
+    <%= form.text_field :cateogry %>
+  </p>
+  <p>
+    <%= form.submit "Create Dish" %>
+  </p>
+<% end %>
+ 

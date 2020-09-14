@@ -1,0 +1,20 @@
+<h2> Updating Existing Dish </h2>
+
+<%= form_with(model: [ @menu,@dish ], local: true ) do |form| %>
+  <p>
+    <%= form.label "Dish Name : " %>
+    <%= form.text_field :name%>
+  </p>
+  
+  <p>
+    <%= form.label "Dish Cateogry : " %>
+    <%= form.text_field :cateogry%>
+  </p>
+  
+  <p>
+    <%= form.submit "UPDATE"%>
+  </p>
+
+  <%= link_to "Back", menu_dish_path %>
+
+<%end%>
