@@ -1,6 +1,12 @@
 <h1> RESTURANT APPLICATION </h1>
-
-
+<div style="float:right;">
+<% if current_user %>
+  <%= link_to 'SIGN-OUT', destroy_user_session_path, method: :delete %>
+<%else%>
+ <%= link_to 'REGISTER USER', new_user_registration_path %>
+ <%= link_to 'SIGN-IN', new_user_session_path %>
+<%end%>
+</div>
 <h2>Listing MENUS</h2>
  
 <table border="1">

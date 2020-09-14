@@ -1,6 +1,6 @@
 class DishesController < ApplicationController
     def custom
-        render plain: params
+        @menu = Menu.find(params[:id])
     end
     def edit
         @menu = Menu.find(params[:menu_id])
@@ -18,7 +18,14 @@ class DishesController < ApplicationController
     end
 
     def update
-        render plain: "here in update"
+        @menu = Menu.find(params[:menu_id])
+        @dish = Dish.find(params[:id])
+
+        if @dish.update(dish_params)
+            redirect_to menu_path(@menu)
+        else 
+            render "custom"
+        end
     end
 
     def destroy
