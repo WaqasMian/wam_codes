@@ -1,0 +1,13 @@
+<%= form_with model: @menu, local: true do |form| %>
+  <p>
+    <%= form.label "Menu Name : " %>
+    <%= form.text_field :name%>
+  </p>
+
+  <p>
+    <%= form.submit "UPDATE"%>
+  </p>
+
+  <%= link_to "Back", menus_path %>
+
+<%end%>
