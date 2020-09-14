@@ -1,4 +1,6 @@
 class MenusController < ApplicationController
+  layout :choose_layout
+
   def index
     @menus = Menu.all
   end
@@ -43,5 +45,15 @@ class MenusController < ApplicationController
   private
     def menu_params
       params.require(:menu).permit(:name)
+    end
+
+    def choose_layout
+      if current_user && current_user.admin?
+        "admin"
+      elsif current_user
+        "user"
+      else
+        "application"
+      end
     end
 end

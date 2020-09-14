@@ -1,5 +1,6 @@
 class DishesController < ApplicationController
     before_action :authenticate_user!
+    layout :choose_layout
     def custom
         @menu = Menu.find(params[:id])
     end
@@ -42,6 +43,15 @@ class DishesController < ApplicationController
       def dish_params
           params.require(:dish).permit(:name, :cateogry)
       end
-
+    
+      def choose_layout
+        if current_user && current_user.admin?
+          "admin"
+        elsif current_user
+          "user"
+        else
+          "application"
+        end
+      end
 end
   
