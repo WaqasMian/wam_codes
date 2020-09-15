@@ -10,15 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_14_190545) do
+ActiveRecord::Schema.define(version: 2020_09_15_064059) do
 
   create_table "dishes", force: :cascade do |t|
     t.string "name"
     t.string "cateogry"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "menu_id"
-    t.index ["menu_id"], name: "index_dishes_on_menu_id"
+  end
+
+  create_table "dishes_menus", id: false, force: :cascade do |t|
+    t.integer "dish_id", null: false
+    t.integer "menu_id", null: false
+    t.index ["dish_id"], name: "index_dishes_menus_on_dish_id"
+    t.index ["menu_id"], name: "index_dishes_menus_on_menu_id"
   end
 
   create_table "menus", force: :cascade do |t|
@@ -40,5 +45,4 @@ ActiveRecord::Schema.define(version: 2020_09_14_190545) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "dishes", "menus"
 end

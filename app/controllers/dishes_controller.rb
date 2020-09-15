@@ -4,10 +4,10 @@ class DishesController < ApplicationController
     def custom
         @menu = Menu.find(params[:id])
     end
+ 
     def edit
         @menu = Menu.find(params[:menu_id])
         @dish = Dish.find(params[:id])
-        
     end
     def show
         

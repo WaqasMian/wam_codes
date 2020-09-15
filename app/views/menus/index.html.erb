@@ -18,10 +18,13 @@
     <th> SHOW </th>
     <th> EDIT </th>
     <th> DESTROY </th>
-    <%else%>
+    <%elsif current_user%>
     <th>MENU ID</th>
     <th> MENU NAME </th>
      <th> SHOW </th>
+     <%else%>
+     <th>MENU ID</th>
+    <th> MENU NAME </th>
     <%end%>
   </tr>
  
@@ -33,15 +36,48 @@
         <td><%= link_to 'Show', menu_path(menu) %></td>
         <td><%= link_to 'Update', edit_menu_path(menu) %></td>
         <td><%= link_to 'Destroy', menu_path(menu), method: :delete, data: {confirm: "Are you sure?"} %></td>
-      <% else %>
+      <% elsif current_user %>
         <td><%= menu.id %></td>
         <td><%= menu.name %></td>
-        <td><%= link_to 'Show', menu_path(menu) %></td>         
+        <td><%= link_to 'Show', menu_path(menu) %></td>  
+      <%else%>
+        <td><%= menu.id %></td>
+        <td><%= menu.name %></td>
       <%end%>
     </tr>
   <% end %>
 </table>
+<br/><br/>
+
+<%if current_user %>
+<h2>Listing DISHES</h2>
+
+<table border="1">
+  <tr>
+    <th> Dish Id </th>
+    <th> Dish Name </th>
+    <th> PRICE</th>
+    <% if current_user && current_user.admin %>
+    <th> UPDATE </th>
+    <th> DELETE </th>
+    <%end%>
+  </tr>
+  <% @dishes.each do |dish| %>
+    <tr>
+    <td> <%= dish.id%> </td>
+    <td> <%= dish.name%> </td>
+    <td> 1000 </td>
+    <%if current_user && current_user.admin %>
+    <td> <%= link_to " UPDATE ", edit_menu_dish_path(1,dish.id)%> </td>
+    <td> <%= link_to "Delete", menu_dish_path(1,dish.id), method: :delete, data: {confirm: "Are you sure?"} %> </td>
+
+    <%end%>
+    </tr>
+  <%end%>
+</table>
+<%end%>
+
 <%if current_user && current_user.admin %>
   <h4> Create a New Menu &nbsp &nbsp &nbsp &nbsp &nbsp Create a New Dish</h4> 
- <p> <%= link_to "Create", new_menu_path%> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= link_to "Create", new_menu_path%> </p>
+ <p> <%= link_to "Create", new_menu_path%> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <%= link_to "Create", my_custom_path(id: 1)%> </p>
 <%end%>
