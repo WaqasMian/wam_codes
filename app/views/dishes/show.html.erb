@@ -1,0 +1,12 @@
+<p style="color:gray;text-align:right;"> No of visits : <%= @count %> </p>
+
+<h3> DISH Details<h3>
+
+<h4> DISH |  PRICE  |  CATEOGRY  </h4>
+<h4> <%= @dish.name %> -- <%= @dish.price%> -- <%= @dish.cateogry%> </h4>
+
+<h5> Dish is in following Menus</h5>
+<%@dish.menu.each do |menu|%>
+  : <%= menu.name%>
+  <br/>
+<%end%>

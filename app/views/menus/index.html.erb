@@ -66,7 +66,7 @@
     <tr>
     <td> <%= dish.id%> </td>
     <td> <%= dish.name%> </td>
-    <td> 1000 </td>
+    <td> <%= dish.price%> </td>
     <%if current_user && current_user.admin %>
     <td> <%= link_to " UPDATE ", edit_menu_dish_path(1,dish.id)%> </td>
     <td> <%= link_to "Delete", menu_dish_path(1,dish.id), method: :delete, data: {confirm: "Are you sure?"} %> </td>

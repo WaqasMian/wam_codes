@@ -8,12 +8,14 @@
   <th> Dish Id</th>
   <th> Dish Name</th>
   <th> Price</th>
+  <th> Show</th>
   <th> EDIT</th>
   <th> Destroy</th>
   <%else %>
    <th> Dish Id</th>
    <th> Dish Name</th>
    <th> Price </th>
+   <th> Show</th>
   <%end%>
 
  </tr>
@@ -22,14 +24,16 @@
   <% if current_user && current_user.admin%>
    <td> <%= dish.id %> </td>
    <td> <%= dish.name %> </td>
-   <td> 1000 </td>
+   <td> <%= dish.price %> </td>
+   <td> <%= link_to "Show", [dish.menu[0],dish] %></td>
    <td> <%= link_to "Update", [:edit, dish.menu[0], dish] %> </td>
    <td> <%= link_to "Delete", [dish.menu[0], dish], method: :delete, data: {confirm: "Are you sure?"} %> </td>
 
    <%else%>
       <td> <%= dish.id %> </td>
       <td> <%= dish.name %> </td>
-      <td> 1000 </td>
+      <td> <%= dish.price %> </td>
+      <td> <%= link_to "Show"%> </td>
     <%end%>
   </tr>
  <%end%>

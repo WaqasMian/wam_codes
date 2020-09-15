@@ -10,7 +10,14 @@ class DishesController < ApplicationController
         @dish = Dish.find(params[:id])
     end
     def show
-        
+      @menu = Menu.find(params[:menu_id])
+      @dish = Dish.find(params[:id])
+
+      @dish.visits ||= 0
+      @dish.visits = @dish.visits + 1
+      @count = @dish.visits
+
+      @dish.save
     end
 
     def create
@@ -41,7 +48,7 @@ class DishesController < ApplicationController
 
     private
       def dish_params
-          params.require(:dish).permit(:name, :cateogry)
+          params.require(:dish).permit(:name, :cateogry, :price)
       end
     
       def choose_layout
