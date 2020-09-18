@@ -1,14 +1,22 @@
 class DishesController < ApplicationController
     before_action :authenticate_user!
+    before_action :is_admin?, only: [:custom,:edit,:destroy]
     layout :choose_layout
+
+    
     def custom
         @menu = Menu.find(params[:id])
     end
- 
+
+    def index
+      @dishes = Dish.all
+    end
+
     def edit
         @menu = Menu.find(params[:menu_id])
         @dish = Dish.find(params[:id])
     end
+
     def show
       @menu = Menu.find(params[:menu_id])
       @dish = Dish.find(params[:id])
@@ -21,8 +29,13 @@ class DishesController < ApplicationController
     end
 
     def create
+
       @menu = Menu.find(params[:menu_id])
-      @dish = @menu.dish.create(dish_params)
+      @dish = Dish.create(dish_params)
+      @dish.visits=0
+      @dish.save
+      @menu.dish << @dish
+      @menu.save
       redirect_to menu_path(@menu)
     end
 
@@ -59,6 +72,10 @@ class DishesController < ApplicationController
         else
           "application"
         end
+      end
+
+      def is_admin?
+        redirect_to root_path unless current_user.admin?
       end
 end
   

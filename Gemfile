@@ -26,7 +26,8 @@ gem 'jbuilder', '~> 2.7'
 
 #gem rspec-rails
 
-gem 'rspec-rails', '~> 3.9'
+gem 'rails-controller-testing'
+
 
 
 # Use Active Storage variant
@@ -38,6 +39,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 4.0.0.beta3'
+
 end
 
 group :development do
@@ -53,6 +56,9 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'database_cleaner', '~> 1.5'
+
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end

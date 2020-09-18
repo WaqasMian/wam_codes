@@ -1,4 +1,6 @@
 class MenusController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :destroy]
+  before_action :is_admin?, only:[:edit ,:destroy]
   layout :choose_layout
 
   def index
@@ -56,5 +58,9 @@ class MenusController < ApplicationController
       else
         "application"
       end
+    end
+
+    def is_admin?
+      redirect_to root_path unless current_user.admin?
     end
 end
